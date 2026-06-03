@@ -9,7 +9,829 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
-    <link href="css/main.css?v=20260603" rel="stylesheet">
+    <style>
+:root {
+    --navy: #09245a;
+    --navy-2: #163f83;
+    --blue: #2d6cdf;
+    --teal: #087f7a;
+    --green: #139b5b;
+    --orange: #c94f00;
+    --orange-soft: #fff2e8;
+    --red: #d71920;
+    --purple: #6c4ab6;
+    --ink: #222a35;
+    --muted: #5c6675;
+    --line: #e4eaf1;
+    --soft: #f6f9fc;
+    --card: #ffffff;
+    --shadow: 0 16px 38px rgba(9, 36, 90, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    color: var(--ink);
+    font-family: "Inter", "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 1.68;
+    background:
+        radial-gradient(circle at 10% 0%, rgba(45, 108, 223, 0.08), transparent 34rem),
+        radial-gradient(circle at 90% 5%, rgba(8, 127, 122, 0.08), transparent 30rem),
+        #fbfcfe;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--navy), var(--teal), var(--orange));
+    z-index: 10;
+}
+
+a {
+    color: var(--navy-2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--orange);
+    text-decoration: none;
+}
+
+a:visited {
+    color: var(--navy-2);
+}
+
+p {
+    margin: 0 0 1.05rem;
+}
+
+strong {
+    color: var(--navy);
+    font-weight: 800;
+}
+
+.page-shell {
+    width: min(1120px, calc(100% - 34px));
+    margin: 34px auto 56px;
+}
+
+.hero,
+.content-card,
+.publication-group,
+.footer {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    border-radius: 22px;
+}
+
+.hero {
+    padding: 32px 34px 20px;
+    margin-bottom: 34px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    right: -110px;
+    top: -120px;
+    border-radius: 50%;
+    background: linear-gradient(140deg, rgba(201, 79, 0, 0.18), rgba(8, 127, 122, 0.10));
+    pointer-events: none;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 230px;
+    gap: 34px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 0.45rem;
+    color: var(--orange);
+    text-transform: uppercase;
+    letter-spacing: 0.095em;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: var(--orange);
+    box-shadow: 0 0 0 5px rgba(201, 79, 0, 0.12);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+    line-height: 1.18;
+}
+
+h1 {
+    color: var(--navy);
+    font-size: clamp(2.65rem, 6vw, 4.9rem);
+    letter-spacing: -0.055em;
+    font-weight: 800;
+}
+
+h1 span {
+    color: var(--teal);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: clamp(1.08rem, 2.2vw, 1.45rem);
+    font-weight: 650;
+}
+
+.hero-summary {
+    max-width: 760px;
+    margin-top: 18px;
+    color: #344050;
+    font-size: 1.04rem;
+}
+
+.profile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 22px 0 20px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 8px 15px;
+    border: 1.5px solid rgba(9, 36, 90, 0.18);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--navy);
+    font-size: 0.92rem;
+    font-weight: 800;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+    background: var(--orange-soft);
+    border-color: rgba(201, 79, 0, 0.28);
+}
+
+.button.primary {
+    color: #fff;
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    border-color: transparent;
+    box-shadow: 0 10px 24px rgba(9, 36, 90, 0.2);
+}
+
+.button.primary:hover {
+    color: #fff;
+    background: linear-gradient(135deg, var(--navy-2), var(--teal));
+}
+
+.quick-facts {
+    display: grid;
+    gap: 6px;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.42;
+}
+
+.quick-facts span {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.quick-facts span::before {
+    content: "•";
+    color: var(--orange);
+    font-weight: 800;
+}
+
+.portrait-card {
+    position: relative;
+    justify-self: center;
+    width: 215px;
+    border-radius: 26px;
+    padding: 10px;
+    background: linear-gradient(150deg, rgba(9, 36, 90, 0.12), rgba(8, 127, 122, 0.08), rgba(201, 79, 0, 0.12));
+    border: 1px solid rgba(9, 36, 90, 0.10);
+}
+
+.portrait {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    display: block;
+    border-radius: 20px;
+    box-shadow: 0 14px 32px rgba(9, 36, 90, 0.18);
+    background: #eef3f7;
+}
+
+.site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-top: 22px;
+    margin-top: 24px;
+    border-top: 1px solid var(--line);
+}
+
+.site-nav a {
+    color: var(--navy);
+    font-size: 0.92rem;
+    font-weight: 800;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: var(--soft);
+    border: 1px solid transparent;
+}
+
+.site-nav a:hover {
+    color: var(--orange);
+    border-color: rgba(201, 79, 0, 0.25);
+    background: #fff8f3;
+}
+
+.section {
+    margin: 30px 0 38px;
+}
+
+.section > h3,
+.section-heading-row h3 {
+    color: var(--orange);
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: clamp(1.9rem, 3.5vw, 2.45rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #edf0f3;
+    position: relative;
+}
+
+.section > h3::after,
+.section-heading-row h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 92px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--teal));
+    border-radius: 99px;
+}
+
+.content-card {
+    margin-top: 18px;
+    padding: 24px 26px;
+}
+
+.about-card p:last-child,
+.research-intro p:last-child {
+    margin-bottom: 0;
+}
+
+.recruiting-callout {
+    margin-top: 18px;
+    padding: 17px 20px;
+    color: var(--red);
+    font-size: 1.03rem;
+    line-height: 1.58;
+    background: linear-gradient(90deg, rgba(215, 25, 32, 0.09), rgba(255, 255, 255, 0.6));
+    border-left: 5px solid var(--red);
+    border-radius: 15px;
+}
+
+.recruiting-callout strong {
+    color: var(--red);
+}
+
+.research-map {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 0.96fr;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.map-panel,
+.research-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 10px 26px rgba(9, 36, 90, 0.06);
+}
+
+.map-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.map-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 5px;
+    background: var(--navy);
+}
+
+.map-panel.problem::before { background: var(--navy-2); }
+.map-panel.method::before { background: var(--teal); }
+.map-panel.vision::before { background: var(--orange); }
+
+.map-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    color: var(--navy);
+    background: #f0f5ff;
+    font-size: 1.35rem;
+    margin-bottom: 12px;
+}
+
+.map-panel.method .map-icon { color: var(--teal); background: #e8f6f4; }
+.map-panel.vision .map-icon { color: var(--orange); background: #fff2e8; }
+
+.map-panel h4,
+.research-card h4,
+.publication-group h4 {
+    color: var(--navy);
+    font-size: 1.08rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+}
+
+.map-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0 0;
+}
+
+.map-panel li {
+    padding: 0 0 0 18px;
+    margin: 0 0 12px;
+    position: relative;
+    line-height: 1.45;
+}
+
+.map-panel li::before {
+    content: "";
+    position: absolute;
+    top: 0.62em;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--orange);
+}
+
+.map-panel li span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 2px;
+}
+
+.method-chips,
+.project-tags,
+.vision-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.method-chips {
+    margin-top: 16px;
+}
+
+.method-chips span,
+.vision-tags span,
+.project-tags span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.method-chips span {
+    color: var(--teal);
+    background: #ebf7f6;
+    border: 1px solid rgba(8, 127, 122, 0.16);
+}
+
+.vision p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 14px 0 15px;
+}
+
+.vision-tags span {
+    color: var(--orange);
+    background: #fff2e8;
+    border: 1px solid rgba(201, 79, 0, 0.17);
+}
+
+.research-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.research-card {
+    border-top: 5px solid var(--navy-2);
+}
+
+.research-card.drugs { border-top-color: var(--orange); }
+.research-card.ehr { border-top-color: var(--teal); }
+
+.research-card p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-top: 10px;
+}
+
+.project-tags {
+    margin-top: 14px;
+}
+
+.project-tags span {
+    color: var(--navy);
+    background: #f1f5ff;
+    border: 1px solid rgba(9, 36, 90, 0.14);
+}
+
+.research-card.drugs .project-tags span {
+    color: var(--orange);
+    background: #fff4eb;
+    border-color: rgba(201, 79, 0, 0.16);
+}
+
+.research-card.ehr .project-tags span {
+    color: var(--teal);
+    background: #ebf7f6;
+    border-color: rgba(8, 127, 122, 0.16);
+}
+
+.section-heading-row {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 18px;
+    border-bottom: 0;
+}
+
+.section-heading-row h3 {
+    flex: 1;
+}
+
+.scholar-note {
+    margin: 0 0 15px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    white-space: nowrap;
+}
+
+.publication-group {
+    margin-top: 20px;
+    padding: 22px 24px 10px;
+}
+
+.publication-group h4 {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--navy);
+    font-size: 1.12rem;
+    margin-bottom: 16px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f3f6ff, #fff7f0);
+    border: 1px solid rgba(9, 36, 90, 0.10);
+}
+
+.publication-group h4::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    background: var(--orange);
+    box-shadow: 0 0 0 5px rgba(201, 79, 0, 0.12);
+}
+
+.pub-item {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 15px;
+    padding: 17px 0 18px;
+    border-bottom: 1px solid var(--line);
+}
+
+.pub-item:last-child {
+    border-bottom: 0;
+}
+
+.pub-year {
+    width: 58px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: var(--navy);
+    border-radius: 10px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    margin-top: 3px;
+    box-shadow: 0 8px 18px rgba(9, 36, 90, 0.16);
+}
+
+.pub-item.featured .pub-year {
+    background: var(--orange);
+}
+
+.pub-body {
+    min-width: 0;
+}
+
+.pub-title {
+    display: inline;
+    color: var(--green);
+    font-size: 1.05rem;
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1.43;
+    border-bottom: 1px solid rgba(19, 155, 91, 0.18);
+}
+
+.pub-title:hover {
+    color: var(--orange);
+    border-color: rgba(201, 79, 0, 0.34);
+}
+
+.pub-title.no-link {
+    color: var(--green);
+    border-bottom: 0;
+}
+
+.project-name {
+    color: var(--navy);
+    font-style: normal;
+    font-weight: 800;
+}
+
+.pub-authors {
+    margin-top: 7px;
+    color: #3d4652;
+    font-size: 0.95rem;
+    line-height: 1.48;
+}
+
+.pub-authors strong {
+    color: var(--ink);
+    font-weight: 850;
+}
+
+.pub-venue {
+    margin-top: 6px;
+    color: #3a4048;
+    font-size: 0.95rem;
+}
+
+.pub-venue strong {
+    color: #161a20;
+    font-weight: 850;
+}
+
+.pub-links {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pub-links a {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 9px;
+    border-radius: 8px;
+    color: var(--navy);
+    background: #f2f6fb;
+    border: 1px solid rgba(9, 36, 90, 0.14);
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.pub-links a:hover {
+    color: var(--orange);
+    background: #fff5ed;
+    border-color: rgba(201, 79, 0, 0.22);
+}
+
+.pub-item.featured {
+    margin: 0 -8px;
+    padding: 17px 8px 18px;
+    border-radius: 14px;
+    background: linear-gradient(90deg, rgba(201, 79, 0, 0.055), rgba(255, 255, 255, 0));
+}
+
+.pub-item.muted {
+    opacity: 0.95;
+}
+
+.footer {
+    margin-top: 32px;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 0.92rem;
+}
+
+.footer p {
+    margin: 0;
+}
+
+@media (max-width: 900px) {
+    body { font-size: 16px; }
+    .page-shell { width: min(100% - 22px, 760px); margin-top: 24px; }
+    .hero { padding: 26px 22px 18px; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .portrait-card { width: 190px; justify-self: start; }
+    .research-map,
+    .research-cards { grid-template-columns: 1fr; }
+    .section-heading-row { display: block; }
+    .scholar-note { white-space: normal; margin-top: 12px; }
+}
+
+@media (max-width: 620px) {
+    body { line-height: 1.62; }
+    .hero { border-radius: 18px; }
+    .profile-actions { gap: 8px; }
+    .button { width: 100%; }
+    .content-card,
+    .publication-group,
+    .map-panel,
+    .research-card { padding: 18px; }
+    .pub-item { grid-template-columns: 1fr; gap: 8px; }
+    .pub-year { width: 54px; height: 29px; }
+    .footer { display: block; }
+    .footer p + p { margin-top: 8px; }
+}
+
+@media print {
+    body { background: #fff; font-size: 12px; }
+    body::before, .site-nav, .profile-actions, .pub-links, .footer { display: none; }
+    .page-shell { width: 100%; margin: 0; }
+    .hero, .content-card, .publication-group, .map-panel, .research-card { box-shadow: none; border-color: #ddd; }
+    a { color: #000; }
+}
+
+
+.personal-note {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(8,127,122,0.08), rgba(45,108,223,0.06));
+    border: 1px solid rgba(9,36,90,0.08);
+    color: var(--muted);
+    font-size: 0.96rem;
+}
+.personal-note strong { color: var(--navy-2); }
+.figure-card {
+    margin-top: 22px;
+    padding: 22px;
+    border-radius: 22px;
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+}
+.figure-card h4 {
+    color: var(--navy);
+    font-size: 1.18rem;
+    margin-bottom: 12px;
+}
+.research-figure {
+    display: block;
+    width: 100%;
+    border-radius: 18px;
+    border: 1px solid rgba(9,36,90,0.08);
+    background: #fff;
+}
+.figure-caption {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 0.94rem;
+}
+.figure-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 14px;
+}
+.figure-legend span {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: var(--soft);
+    border: 1px solid var(--line);
+    color: var(--navy-2);
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+.pub-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 9px;
+}
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(9,36,90,0.10);
+    background: #fff;
+    color: var(--navy-2);
+}
+.badge.ccf {
+    background: rgba(45,108,223,0.08);
+    color: var(--navy);
+    border-color: rgba(45,108,223,0.18);
+}
+.badge.if {
+    background: rgba(19,155,91,0.08);
+    color: #0a7d46;
+    border-color: rgba(19,155,91,0.16);
+}
+.badge.preprint {
+    background: rgba(201,79,0,0.08);
+    color: var(--orange);
+    border-color: rgba(201,79,0,0.16);
+}
+.improvement-note {
+    margin-top: 18px;
+    padding: 16px 18px;
+    border-left: 4px solid var(--orange);
+    background: var(--orange-soft);
+    border-radius: 14px;
+    color: #5b3a1f;
+    font-size: 0.92rem;
+}
+@media (max-width: 720px) {
+    .figure-card { padding: 16px; }
+}
+
+</style>
 </head>
 <body>
     <div class="page-shell">
@@ -30,7 +852,7 @@
                     </div>
                     <div class="quick-facts">
                         <span>Mohamed bin Zayed University of Artificial Intelligence</span>
-                        <span>1B Building, Masdar City,  Abu Dhabi, UAE</span>
+                        <span>1B Building, Masdar City, Abu Dhabi, UAE</span>
                         <span><a href="mailto:jun.wen@mbzuai.ac.ae">jun.wen@mbzuai.ac.ae</a> / <a href="mailto:jungel2star@gmail.com">jungel2star@gmail.com</a></span>
                     </div>
                 </div>
@@ -72,6 +894,7 @@
                         🚀 <strong>I am looking for postdoctoral fellows, Ph.D. students, master’s students, and visiting researchers working at the intersection of AI and precision medicine.</strong>
                         Interested candidates are warmly welcome to send me their CV and research statement.
                     </p>
+                    <p class="personal-note">♠️ <strong>Outside research</strong>, I enjoy playing <strong>poker</strong> and <strong>ultimate frisbee</strong> (飞盘). I like building a homepage that also feels a bit personal and approachable, not just a publication list.</p>
                 </div>
             </section>
 
@@ -85,6 +908,25 @@
                         protein and molecule foundation models, and large-scale biobank data. We aim to understand the complex interplays among
                         medications, genetic variants, molecular profiles, and diseases or phenotypes.
                     </p>
+                </div>
+
+                <div class="figure-card">
+                    <h4>Research overview</h4>
+                    <img class="research-figure" src="research_overview.png" alt="Research overview summarizing Jun Wen's work in precision medicine AI">
+                    <p class="figure-caption">
+                        A unifying view of my research: integrating <strong>biological networks</strong>, <strong>transcriptomics</strong>, <strong>biobank data</strong>, and <strong>clinical evidence</strong>
+                        to study variant-to-phenotype interpretation, drug development and repurposing, pharmacogenomics, and EHR-based translational research.
+                    </p>
+                    <div class="figure-legend">
+                        <span>PheMART · variant → phenotype</span>
+                        <span>INTERLACE / HERMES · drug–gene–disease</span>
+                        <span>SynCell · drug synergy</span>
+                        <span>HyperADRs · drug–gene–ADR</span>
+                        <span>LATTE / SeDDLeR / DOME · EHR translation</span>
+                    </div>
+                    <div class="improvement-note">
+                        Tip: this figure gives visitors a fast visual summary before they read the full publication list, which usually improves how memorable the homepage feels.
+                    </div>
                 </div>
 
                 <div class="research-map" aria-label="Research overview">
@@ -155,6 +997,7 @@
                             <a class="pub-title" href="https://www.nature.com/articles/s41551-026-01636-4" target="_blank" rel="noopener">Phenotypic prediction of missense variants via deep contrastive learning <span class="project-name">PheMART</span></a>
                             <div class="pub-authors"><strong>J. Wen</strong>, S. Zeng, C.-L. Bonzel, S. N. Kobren, J. Du, Y. Chai, H. Wang, M. Zhu, S. Chen, F. Leng, H. G. Zhang, K. P. Liao, K. Cho, I. S. Kohane, M. Zitnik, A. C. Pereira, J. S. Liu, T. Cai</div>
                             <div class="pub-venue"><strong>Nature Biomedical Engineering</strong>, 2026</div>
+                            <div class="pub-meta"><span class="badge if">Journal</span><span class="badge if">Impact factor can be updated yearly</span></div>
                             <div class="pub-links"><a href="https://www.nature.com/articles/s41551-026-01636-4" target="_blank" rel="noopener">Paper</a></div>
                         </div>
                     </article>
@@ -165,6 +1008,7 @@
                             <a class="pub-title" href="https://icml.cc/Downloads/2026" target="_blank" rel="noopener">CONTEXTOR: Contextualized High-order Contrastive Learning</a>
                             <div class="pub-authors">Z. Cai*, H. Liang*, S. Zeng, B. Zhou†, <strong>J. Wen†</strong></div>
                             <div class="pub-venue"><strong>International Conference on Machine Learning (ICML)</strong>, 2026</div>
+                            <div class="pub-meta"><span class="badge ccf">CCF A</span><span class="badge">Top ML conference</span></div>
                             <div class="pub-links"><a href="https://icml.cc/Downloads/2026" target="_blank" rel="noopener">ICML</a></div>
                         </div>
                     </article>
@@ -175,6 +1019,7 @@
                             <a class="pub-title" href="https://www.nature.com/articles/s42003-026-09761-1" target="_blank" rel="noopener">A multi-way SMILES-based hypergraph inference network for metabolic model reconstruction</a>
                             <div class="pub-authors">Y. Zhao, Y. Chen, Y. Yu, X. Liu, J. Du, <strong>J. Wen</strong>, Q. Sun, R. Wang, C. Chen</div>
                             <div class="pub-venue"><strong>Communications Biology</strong>, 9, 531, 2026</div>
+                            <div class="pub-meta"><span class="badge if">Journal</span></div>
                             <div class="pub-links"><a href="https://www.nature.com/articles/s42003-026-09761-1" target="_blank" rel="noopener">Paper</a></div>
                         </div>
                     </article>
@@ -185,6 +1030,7 @@
                             <a class="pub-title" href="https://arxiv.org/abs/2511.17695" target="_blank" rel="noopener">SynCell: Contextualized Drug Synergy Prediction</a>
                             <div class="pub-authors">K. Peng, G. Su, Q. Shi, S. Gao, R. Wang, C. Chen, <strong>J. Wen</strong></div>
                             <div class="pub-venue"><strong>arXiv preprint</strong>, 2025</div>
+                            <div class="pub-meta"><span class="badge preprint">Preprint</span></div>
                             <div class="pub-links"><a href="https://arxiv.org/abs/2511.17695" target="_blank" rel="noopener">arXiv</a></div>
                         </div>
                     </article>
@@ -195,6 +1041,7 @@
                             <a class="pub-title" href="https://arxiv.org/abs/2512.00137" target="_blank" rel="noopener">HyperADRs: A Hierarchical Hypergraph Framework for Drug-Gene-ADR Prediction</a>
                             <div class="pub-authors">Z. Cai, H. Tang, S. Gao, B. Zhou, J. Zhao, <strong>J. Wen</strong></div>
                             <div class="pub-venue"><strong>arXiv preprint</strong>, 2025</div>
+                            <div class="pub-meta"><span class="badge preprint">Preprint</span></div>
                             <div class="pub-links"><a href="https://arxiv.org/abs/2512.00137" target="_blank" rel="noopener">arXiv</a></div>
                         </div>
                     </article>
@@ -205,6 +1052,7 @@
                             <a class="pub-title" href="https://academic.oup.com/bioinformatics/article/41/1/btae750/7954691" target="_blank" rel="noopener">Heterogeneous Entity Representation for Medicinal Synergy Prediction</a>
                             <div class="pub-authors">J. Wu*, <strong>J. Wen*</strong>, M. Yan*, ..., C. Chen</div>
                             <div class="pub-venue"><strong>Bioinformatics</strong>, 41(1), btae750, 2025</div>
+                            <div class="pub-meta"><span class="badge if">Journal</span></div>
                             <div class="pub-links"><a href="https://academic.oup.com/bioinformatics/article/41/1/btae750/7954691" target="_blank" rel="noopener">Paper</a></div>
                         </div>
                     </article>
@@ -215,6 +1063,7 @@
                             <a class="pub-title" href="https://academic.oup.com/bioinformatics/article/39/2/btad085/7034101" target="_blank" rel="noopener">Multimodal Representation Learning for Predicting Molecule–Disease Relations</a>
                             <div class="pub-authors"><strong>J. Wen</strong>, X. Zhang, E. Rush, ..., T. Cai</div>
                             <div class="pub-venue"><strong>Bioinformatics</strong>, 39(2), btad085, 2023</div>
+                            <div class="pub-meta"><span class="badge if">Journal</span></div>
                             <div class="pub-links"><a href="https://academic.oup.com/bioinformatics/article/39/2/btad085/7034101" target="_blank" rel="noopener">Paper</a></div>
                         </div>
                     </article>
@@ -332,6 +1181,7 @@
                             <a class="pub-title" href="https://arxiv.org/abs/2605.09907" target="_blank" rel="noopener">RADAR: Redundancy-Aware Diffusion for Multi-Agent Communication Structure Generation</a>
                             <div class="pub-authors">Z. Zhang, W. Zhou, J. Li, H. Fei, <strong>J. Wen</strong>, W. Ji</div>
                             <div class="pub-venue"><strong>International Conference on Machine Learning (ICML)</strong>, 2026</div>
+                            <div class="pub-meta"><span class="badge ccf">CCF A</span><span class="badge">Top ML conference</span></div>
                             <div class="pub-links"><a href="https://arxiv.org/abs/2605.09907" target="_blank" rel="noopener">arXiv</a></div>
                         </div>
                     </article>
@@ -362,6 +1212,7 @@
                             <a class="pub-title" href="https://doi.org/10.1109/TKDE.2023.3266785" target="_blank" rel="noopener">Towards More General Loss and Setting in Unsupervised Domain Adaptation</a>
                             <div class="pub-authors">C. Shui, R. Pu, G. Xu, <strong>J. Wen</strong>, ..., B. Wang</div>
                             <div class="pub-venue"><strong>IEEE Transactions on Knowledge and Data Engineering</strong>, 35(10), 10140–10150, 2023</div>
+                            <div class="pub-meta"><span class="badge ccf">CCF A</span><span class="badge if">Journal</span></div>
                             <div class="pub-links"><a href="https://doi.org/10.1109/TKDE.2023.3266785" target="_blank" rel="noopener">DOI</a></div>
                         </div>
                     </article>
@@ -382,6 +1233,7 @@
                             <a class="pub-title" href="https://www.ijcai.org/proceedings/2019/534" target="_blank" rel="noopener">Bayesian Uncertainty Matching for Unsupervised Domain Adaptation</a>
                             <div class="pub-authors"><strong>J. Wen</strong>, N. Zheng, J. Yuan, Z. Gong, C. Chen</div>
                             <div class="pub-venue"><strong>International Joint Conference on Artificial Intelligence (IJCAI)</strong>, 2019</div>
+                            <div class="pub-meta"><span class="badge ccf">CCF A</span></div>
                             <div class="pub-links"><a href="https://www.ijcai.org/proceedings/2019/534" target="_blank" rel="noopener">Paper</a></div>
                         </div>
                     </article>
@@ -392,6 +1244,7 @@
                             <a class="pub-title" href="https://aaai.org/papers/05401-exploiting-local-feature-patterns-for-unsupervised-domain-adaptation/" target="_blank" rel="noopener">Exploiting Local Feature Patterns for Unsupervised Domain Adaptation</a>
                             <div class="pub-authors"><strong>J. Wen</strong>, R. Liu, N. Zheng, Q. Zheng, Z. Gong, J. Yuan</div>
                             <div class="pub-venue"><strong>AAAI Conference on Artificial Intelligence (AAAI)</strong>, 2019</div>
+                            <div class="pub-meta"><span class="badge ccf">CCF A</span></div>
                             <div class="pub-links"><a href="https://aaai.org/papers/05401-exploiting-local-feature-patterns-for-unsupervised-domain-adaptation/" target="_blank" rel="noopener">Paper</a></div>
                         </div>
                     </article>
@@ -402,6 +1255,7 @@
                             <a class="pub-title" href="https://ojs.aaai.org/index.php/AAAI/article/view/11853" target="_blank" rel="noopener">Unsupervised Representation Learning with Long-Term Dynamics for Skeleton-Based Action Recognition</a>
                             <div class="pub-authors"><strong>J. Wen</strong>, N. Zheng, R. Liu, L. Long, J. Dai, Z. Gong</div>
                             <div class="pub-venue"><strong>AAAI Conference on Artificial Intelligence (AAAI)</strong>, 2018</div>
+                            <div class="pub-meta"><span class="badge ccf">CCF A</span></div>
                             <div class="pub-links"><a href="https://ojs.aaai.org/index.php/AAAI/article/view/11853" target="_blank" rel="noopener">Paper</a></div>
                         </div>
                     </article>
@@ -423,7 +1277,7 @@
         </main>
 
         <footer class="footer">
-            <p>© Jun Wen · Precision-medicine AI Lab · Last updated June 2026</p>
+            <p>© Jun Wen · Precision-medicine AI Lab · Last updated June 2026 · Homepage refined with research overview, project legend, and personal notes</p>
             <p><a href="#top">Back to top ↑</a></p>
         </footer>
     </div>
