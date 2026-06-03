@@ -839,6 +839,148 @@ h2 {
     line-height: 1.5;
 }
 
+
+.visitor-analytics-card {
+    margin-top: 20px;
+    padding: 24px 26px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+}
+.visitor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+.visitor-header h4 {
+    color: var(--navy);
+    font-size: 1.2rem;
+    font-weight: 850;
+    margin: 0;
+}
+.visitor-header p {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+.visitor-privacy {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #ebf7f6;
+    color: var(--teal);
+    border: 1px solid rgba(8, 127, 122, 0.18);
+    font-size: 0.78rem;
+    font-weight: 850;
+    white-space: nowrap;
+}
+.visitor-grid {
+    display: grid;
+    grid-template-columns: 230px minmax(0, 1fr);
+    gap: 18px;
+    align-items: stretch;
+}
+.visitor-total-card {
+    padding: 18px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(9,36,90,0.96), rgba(22,63,131,0.92));
+    color: #fff;
+    box-shadow: 0 14px 32px rgba(9, 36, 90, 0.18);
+}
+.visitor-total-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    font-weight: 850;
+    color: rgba(255,255,255,0.75);
+}
+.visitor-total-number {
+    display: block;
+    margin-top: 8px;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+}
+.visitor-today {
+    margin-top: 10px;
+    color: rgba(255,255,255,0.82);
+    font-size: 0.9rem;
+}
+.continent-panel {
+    padding: 18px;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid var(--line);
+}
+.continent-title-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.continent-title-row strong {
+    color: var(--navy);
+    font-size: 0.98rem;
+}
+#visitor-status {
+    color: var(--muted);
+    font-size: 0.82rem;
+}
+.continent-list {
+    display: grid;
+    gap: 10px;
+}
+.continent-row {
+    display: grid;
+    grid-template-columns: 124px minmax(0, 1fr) 56px;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.86rem;
+}
+.continent-name {
+    color: #354052;
+    font-weight: 750;
+}
+.continent-count {
+    color: var(--muted);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.continent-bar {
+    position: relative;
+    overflow: hidden;
+    height: 10px;
+    border-radius: 999px;
+    background: #eef3f7;
+}
+.continent-bar span {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 0%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--teal), var(--blue));
+    transition: width 0.5s ease;
+}
+.visitor-footnote {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.45;
+}
+@media (max-width: 780px) {
+    .visitor-header { display: block; }
+    .visitor-privacy { margin-top: 10px; }
+    .visitor-grid { grid-template-columns: 1fr; }
+    .continent-row { grid-template-columns: 112px minmax(0, 1fr) 52px; }
+}
+
 </style>
 </head>
 <body>
@@ -871,6 +1013,7 @@ h2 {
                 <a href="#about">About</a>
                 <a href="#research">Research</a>
                 <a href="#publications">Publications</a>
+                <a href="#visitor-analytics">Visitor Stats</a>
             </nav>
         </header>
 
@@ -1303,6 +1446,42 @@ h2 {
                     </article>
                 </section>
             </section>
+
+            <section class="section" id="visitor-analytics">
+                <h3>Visitor Analytics</h3>
+                <div class="visitor-analytics-card">
+                    <div class="visitor-header">
+                        <div>
+                            <h4>Homepage visits</h4>
+                            <p>Lightweight page-view counter with an approximate continent-level distribution. IP addresses are not displayed or stored by this homepage code.</p>
+                        </div>
+                        <span class="visitor-privacy">Privacy-friendly summary</span>
+                    </div>
+                    <div class="visitor-grid" aria-live="polite">
+                        <div class="visitor-total-card">
+                            <span class="visitor-total-label">Total page views</span>
+                            <span class="visitor-total-number" id="visitor-total">—</span>
+                            <div class="visitor-today">Today: <span id="visitor-today">—</span></div>
+                        </div>
+                        <div class="continent-panel">
+                            <div class="continent-title-row">
+                                <strong>Visitors by continent</strong>
+                                <span id="visitor-status">Waiting for stats endpoint</span>
+                            </div>
+                            <div class="continent-list" id="continent-list">
+                                <div class="continent-row"><span class="continent-name">Asia</span><div class="continent-bar"><span></span></div><span class="continent-count">—</span></div>
+                                <div class="continent-row"><span class="continent-name">Europe</span><div class="continent-bar"><span></span></div><span class="continent-count">—</span></div>
+                                <div class="continent-row"><span class="continent-name">North America</span><div class="continent-bar"><span></span></div><span class="continent-count">—</span></div>
+                                <div class="continent-row"><span class="continent-name">Oceania</span><div class="continent-bar"><span></span></div><span class="continent-count">—</span></div>
+                                <div class="continent-row"><span class="continent-name">South America</span><div class="continent-bar"><span></span></div><span class="continent-count">—</span></div>
+                                <div class="continent-row"><span class="continent-name">Africa</span><div class="continent-bar"><span></span></div><span class="continent-count">—</span></div>
+                            </div>
+                            <p class="visitor-footnote">Counts are page views, not unique visitors. The continent estimate comes from the analytics endpoint and is aggregated only.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </main>
 
         <footer class="footer">
@@ -1310,5 +1489,82 @@ h2 {
             <p><a href="#top">Back to top ↑</a></p>
         </footer>
     </div>
+<script>
+(function () {
+    // After you deploy visitor-worker.js to Cloudflare Workers, replace the value below with your Worker URL.
+    // Example: https://junwen-visitor-counter.YOUR-SUBDOMAIN.workers.dev
+    const VISITOR_STATS_ENDPOINT = "PASTE_YOUR_CLOUDFLARE_WORKER_URL_HERE";
+
+    const totalEl = document.getElementById("visitor-total");
+    const todayEl = document.getElementById("visitor-today");
+    const statusEl = document.getElementById("visitor-status");
+    const listEl = document.getElementById("continent-list");
+
+    const continentOrder = [
+        ["AS", "Asia"],
+        ["EU", "Europe"],
+        ["NA", "North America"],
+        ["OC", "Oceania"],
+        ["SA", "South America"],
+        ["AF", "Africa"]
+    ];
+
+    function formatNumber(value) {
+        const number = Number(value || 0);
+        return number.toLocaleString("en-US");
+    }
+
+    function renderRows(continents, totalKnown) {
+        listEl.innerHTML = "";
+        const maxCount = Math.max(1, ...continentOrder.map(([code]) => Number(continents?.[code] || 0)));
+        continentOrder.forEach(([code, label]) => {
+            const count = Number(continents?.[code] || 0);
+            const pct = totalKnown > 0 ? Math.round((count / totalKnown) * 100) : 0;
+            const width = Math.max(2, Math.round((count / maxCount) * 100));
+            const row = document.createElement("div");
+            row.className = "continent-row";
+            row.innerHTML = `
+                <span class="continent-name">${label}</span>
+                <div class="continent-bar" title="${label}: ${formatNumber(count)} page views${totalKnown ? ` · ${pct}%` : ""}"><span style="width:${count ? width : 0}%"></span></div>
+                <span class="continent-count">${formatNumber(count)}</span>
+            `;
+            listEl.appendChild(row);
+        });
+    }
+
+    function setFallback(message) {
+        if (statusEl) statusEl.textContent = message;
+        if (totalEl) totalEl.textContent = "—";
+        if (todayEl) todayEl.textContent = "—";
+    }
+
+    if (!VISITOR_STATS_ENDPOINT || VISITOR_STATS_ENDPOINT.includes("PASTE_YOUR")) {
+        setFallback("Stats endpoint not configured yet");
+        return;
+    }
+
+    statusEl.textContent = "Loading...";
+    fetch(VISITOR_STATS_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ path: window.location.pathname || "/" }),
+        cache: "no-store"
+    })
+        .then(response => {
+            if (!response.ok) throw new Error("HTTP " + response.status);
+            return response.json();
+        })
+        .then(data => {
+            totalEl.textContent = formatNumber(data.total);
+            todayEl.textContent = formatNumber(data.today);
+            renderRows(data.continents || {}, Number(data.knownContinentTotal || 0));
+            statusEl.textContent = data.lastUpdated ? "Updated " + new Date(data.lastUpdated).toLocaleDateString("en-US") : "Updated";
+        })
+        .catch(() => {
+            setFallback("Stats temporarily unavailable");
+        });
+})();
+</script>
+
 </body>
 </html>
